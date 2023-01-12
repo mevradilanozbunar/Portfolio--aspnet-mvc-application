@@ -1,0 +1,379 @@
+﻿
+
+<div style="padding-top:70px" class="row">
+    <div class="col-12">
+
+        <div class="page-title-box align-self-center p-static order-2 text-center">
+            <h4 class="mb-0">EXPERIENCE ADMINISTRATION PANEL</h4>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="overflow:auto">
+
+                <h4 class="card-title">Experiences</h4>
+                <button type="button" class="btn btn-success waves-effect waves-light" onclick="addExperience()" data-bs-toggle="modal" data-bs-target="#modalAdd">ADD</button>
+                <p class="card-title-desc">
+                    You can view and edit experiences on this screen.
+                </p>
+
+                <table id="dataTable" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Company Name</th>
+                            <th>Position</th>                          
+                            <th>Description</th>
+                            <th>Location</th>                            
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<div id="modalAdd" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalAddLabel">Add Experience</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">              
+                    <div class="mb-3 row">
+                        <label for="txtCompNameAdd" class="col-md-4 col-form-label">Company Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtCompNameAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtPosiAdd" class="col-md-4 col-form-label">Position</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtPosiAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtDescAdd" class="col-md-4 col-form-label">Description</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtDescAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtLocAdd" class="col-md-4 col-form-label">Location</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtlocAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dateStartDateAdd" class="col-4 col-form-label">Start Date</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control" id="dateStartDateAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dateEndDateAdd" class="col-4 col-form-label">End Date</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control" id="dateEndDateAdd">
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelAdd" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmAdd" class="btn btn-primary waves-effect waves-light">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+<div id="modalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalEditLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalEditLabel">Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">                   
+                    <div class="mb-3 row">
+                        <label for="txtCompNameEdit" class="col-md-4 col-form-label">Company Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtCompNameEdit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtPosiEdit" class="col-md-4 col-form-label">Position</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtPosiEdit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtDescEdit" class="col-md-4 col-form-label">Description</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtDescEdit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtLocEdit" class="col-md-4 col-form-label">Location</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtLocEdit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dateStartDateEdit" class="col-4 col-form-label">Start Date</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control" id="dateStartDateEdit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dateEndDateEdit" class="col-4 col-form-label">End Date</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control" id="dateEndDateEdit">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelEdit" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmEdit" class="btn btn-primary waves-effect waves-light">Edit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section Scripts{
+    <!-- Required datatable js -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.uikit.min.css">
+
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/select2/js/select2.min.js"></script>
+    <script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.uikit.min.js"></script>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+
+
+
+        var _dataTable = $("#dataTable").DataTable(
+            {
+                pagingType: 'full_numbers',
+                ajax: '@Url.Action("GetAll","Experience")',
+                columns: [
+                    { data: 'id' },
+                    { data: 'companyName' },
+                    { data: 'position' },
+                    { data: 'description' },
+                    { data: 'location' },
+                    { data: 'startDate' },
+                    { data: 'endDate' },
+                    {
+                        data: 'id', render: function (data, type) {
+                            return `<a  onClick="deleteExperience('${data}')" class="btn btn-danger"> Delete </a> <a onClick="editExperience('${data}')" class="btn btn-info"> Edit </a>`;
+                        }
+
+                    },
+                ],
+                columnDefs: [
+                    {
+                        target: 5,
+                        render: DataTable.render.date(),
+                    },
+                    {
+                        target: 6,
+                        render: DataTable.render.date(),
+                    },
+
+
+                ],
+
+            }
+        );
+
+
+
+        function addExperience() {
+
+            $("#modalAdd").modal('show');
+            $("#displayDiv").hide();
+
+            $("#btnConfirmAdd").off('click').on('click', function () {
+                var data = {
+                    companyName: $("#txtCompNameAdd").val(),
+                    position: $("#txtPosiAdd").val(),
+                    description: $("#txtDescAdd").val(),
+                    location: $("#txtlocAdd").val(),
+                    startDate: $("#dateStartDateAdd").val(),
+                    endDate: $("#dateEndDateAdd").val(),
+                }
+
+                $.ajax({
+                    type: "POST",
+                    data: data,
+                    url: "@Url.Action("Add","Experience")",
+                    success: function (res) {
+
+
+                        $("#modalAdd").modal('hide');
+                        _dataTable.ajax.reload();
+                        $('#modalAdd').on('shown.bs.modal', function () {
+                            $("#txtCompNameAdd").val('');
+                            $("#txtPosiAdd").val('');
+                            $("#txtDescAdd").val('');
+                            $("#txtlocAdd").val('');
+                            $("#dateStartDateAdd").val('');
+                            $("#dateEndDateAdd").val('');
+                        });
+                    }
+
+
+                });
+
+
+            });
+
+            $("#btnCancelAdd").on('click', function () {
+
+                $("#modalAdd").modal('hide');
+
+
+
+
+
+            });
+
+
+        };
+        function editExperience(id) {
+            $("#modalEdit").modal('show');
+
+            var veri = {
+                id: id
+
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetById","Experience")",
+                data: veri,
+                success: function (res) {
+
+                    $("#displayDivEdit").show();
+                    $("#txtCompNameEdit").val(res.companyName);
+                    $("#txtPosiEdit").val(res.position);
+                    $("#txtDescEdit").val(res.description);
+                    $("#txtLocEdit").val(res.location);
+                    $("#dateStartDateEdit").val((res.startDate).slice(0, 10));
+                    $("#dateEndDateEdit").val((res.endDate).slice(0, 10));
+
+                    $("#btnConfirmEdit").click(function () {
+
+
+                        veri =
+                        {
+                            id: id,
+                            companyName: $("#txtCompNameEdit").val(),
+                            position: $("#txtPosiEdit").val(),
+                            description: $("#txtDescEdit").val(),
+                            location: $("#txtLocEdit").val(),
+                            startDate: $("#dateStartDateEdit").val(),
+                            endDate: $("#dateEndDateEdit").val(),
+
+
+                        }
+                        //todo editte fonksiyona tıklancak
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("Edit","Experience")",
+                            data: veri,
+                            success: function (res) {
+
+                                $("#modalEdit").modal('hide');
+                                _dataTable.ajax.reload();
+
+
+                            }
+                        })
+
+                    });
+
+                    $("#btnCancelEdit").on('click', function () {
+
+                        $("#modalEdit").modal('hide');
+
+
+                    });
+                }
+
+            })
+        }
+
+
+
+
+
+
+
+
+        function deleteExperience(id) {
+
+            var data = {
+                id: id
+
+            };
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: "@Url.Action("Delete","Experience")",
+                success: function (res) {
+
+
+                    _dataTable.ajax.reload();
+                }
+
+
+            });
+
+
+
+        }
+
+
+
+
+    </script>
+}

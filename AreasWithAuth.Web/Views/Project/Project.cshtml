@@ -1,0 +1,89 @@
+﻿@using AreasWithAuth.Models;
+@using AreasWithAuth.Models.ViewModels;
+@{
+	Layout = "_Layout";
+}
+@model ProjectModel
+
+
+<section class="page-header page-header-modern bg-color-light-scale-1 page-header-md ">
+	<div class="container-fluid">
+		<div class="row align-items-center">
+
+
+
+			<div class="col">
+				<div class="row">
+					<div class="col-md-12 align-self-center p-static order-2 text-center">
+						<div class="overflow-hidden pb-2">
+							<h1 class="text-dark font-weight-bold text-9 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="100">@Model.projects.Name</h2>
+						</div>
+					</div>
+					<div class="col-md-12 align-self-center order-1">
+						<ul class="breadcrumb d-block text-center appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="300">
+							<li><a asp-controller="Home" asp-action="Index">Portfolyo</a></li>
+							<li><a asp-controller="Project" asp-action="Index">Projeler</a></li>
+							<li class="active">@Model.projects.Name</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+</section>
+
+<div class="container py-4">
+
+	<div class="row">
+		<div class="col appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="300">
+
+			<div class="owl-carousel owl-theme nav-inside nav-inside-edge nav-squared nav-with-transparency nav-dark nav-lg d-block overflow-hidden" data-plugin-options="{'items': 1, 'margin': 10, 'loop': false, 'nav': true, 'dots': false, 'autoHeight': true}" style="height: 200px;">
+				@foreach (var item in Model.projectPhotos)
+				{
+					//to do yap
+					<div>
+						<div class="img-thumbnail border-0 border-radius-0 p-0 d-block">
+							<img src="@item.FileName" class="img-fluid border-radius-0" alt="">
+						</div>
+					</div>
+				}
+				
+			</div>
+
+		</div>
+	</div>
+	<div class="row pt-4 mt-2 mb-5">
+		<div class="col-md-7 mb-4 mb-md-0">
+
+			<p><strong class="text-color-primary">@Model.projects.Baslik </strong></p>
+			<p>@Model.projects.Icerik</p>
+
+
+
+
+			@{
+			}
+		</div>
+		<div class="col-md-5">
+			<h2 class="text-color-dark font-weight-normal text-5 mb-2">Proje Detayları</h2>
+			<ul class="list list-icons list-primary list-borders text-2">
+
+				<li><i class="fas fa-caret-right left-10"></i> <strong class="text-color-primary">Programlama Dili:</strong> @Model.projects.ProgramlamaDilleri</li>
+
+				<li><i class="fas fa-caret-right left-10"></i> <strong class="text-color-primary">Teknolojiler:</strong> @Model.projects.Teknolojiler</li>
+
+
+				<li><i class="fas fa-caret-right left-10"></i> <strong class="text-color-primary">Yayın Tarihi:</strong> @Model.projects.DateCreated.ToShortDateString()</li>
+
+				<li><i class="fas fa-caret-right left-10"></i> <strong class="text-color-primary">GitHub Link:</strong> <a href="@Model.projects.GithubLink" target="_blank" class="text-dark"> @Model.projects.Name </a></li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+			</div>
+

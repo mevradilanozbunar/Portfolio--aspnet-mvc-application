@@ -1,0 +1,273 @@
+﻿
+<div style="padding-top:70px" class="row">
+    <div class="col-12">
+
+        <div class="page-title-box align-self-center p-static order-2 text-center">
+            <h4 class="mb-0">USER ROLE ADMINISTRATION PANEL</h4>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="overflow:auto">
+
+                <h4 class="card-title">User Roles</h4>
+                <button type="button" class="btn btn-success waves-effect waves-light" onclick="addUserRole()" data-bs-toggle="modal" data-bs-target="#modalAdd">ADD</button>
+                <p class="card-title-desc">
+                    You can view and edit user roles on this screen.
+                </p>
+
+                <table id="dataTable" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>                           
+                            <th>Name</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<div id="modalAdd" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalAddLabel">Add User Role</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="txtNameAdd" class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtNameAdd">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelAdd" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmAdd" class="btn btn-primary waves-effect waves-light">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+<div id="modalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalEditLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalEditLabel">Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="txtNameEdit" class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtNameEdit">
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelEdit" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmEdit" class="btn btn-primary waves-effect waves-light">Edit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section Scripts{
+    <!-- Required datatable js -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.uikit.min.css">
+
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/select2/js/select2.min.js"></script>
+    <script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.uikit.min.js"></script>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+
+
+
+        var _dataTable = $("#dataTable").DataTable(
+            {
+                pagingType: 'full_numbers',
+                ajax: "@Url.Action("GetAll","UserRole")",
+                columns: [
+                    { data: 'id' },
+                    { data: 'name' },
+                    {
+                        data: 'id', render: function (data, type) {
+                            return `<a  onClick="deleteUserRole('${data}')" class="btn btn-danger"> Delete </a> <a onClick="editUserRole('${data}')" class="btn btn-info"> Edit </a>`;
+                        }
+
+                    },
+                ],
+
+
+            }
+        );
+
+
+
+        function addUserRole() {
+
+            $("#modalAdd").modal('show');
+           
+
+            $("#btnConfirmAdd").off('click').on('click', function () {
+                var data = {
+                    name: $("#txtNameAdd").val(),
+                    
+                }
+
+                $.ajax({
+                    type: "POST",
+                    data: data,
+                    url: "@Url.Action("Add","UserRole")",
+                    success: function (res) {
+
+
+                        $("#modalAdd").modal('hide');
+                        _dataTable.ajax.reload();
+                    }
+
+
+                });
+
+
+            });
+
+            $("#btnCancelAdd").on('click', function () {
+
+                $("#modalAdd").modal('hide');
+
+
+
+
+
+            });
+
+
+        };
+        function editUserRole(id) {
+            $("#modalEdit").modal('show');
+
+            var veri = {
+                id: id
+
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetById","UserRole")",
+                data: veri,
+                success: function (res) {
+
+                    $("#txtNameEdit").val(res.name),
+                       
+
+
+                        $("#btnConfirmEdit").click(function () {
+
+
+                            veri =
+                            {
+                                id: id,
+                                name: $("#txtNameEdit").val(),
+                              
+
+                            }
+
+                            $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("Edit","UserRole")",
+                                data: veri,
+                                success: function (res) {
+
+                                    $("#modalEdit").modal('hide');
+                                    _dataTable.ajax.reload();
+
+
+                                }
+                            })
+
+                        });
+
+                    $("#btnCancelEdit").on('click', function () {
+
+                        $("#modalEdit").modal('hide');
+
+
+                    });
+                }
+
+            })
+        }
+
+
+
+
+
+
+
+
+        function deleteUserRole(id) {
+
+            var data = {
+                id: id
+
+            };
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: "@Url.Action("Delete","UserRole")",
+                success: function (res) {
+
+
+                    _dataTable.ajax.reload();
+                }
+
+
+            });
+
+
+
+        }
+
+
+
+
+    </script>
+}

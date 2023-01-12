@@ -1,0 +1,435 @@
+﻿@using AreasWithAuth.Models;
+@model List<ProjectCategory>
+
+<div style="padding-top:70px" class="row">
+    <div class="col-12">
+
+        <div class="page-title-box align-self-center p-static order-2 text-center">
+            <h4 class="mb-0">PROJECTS ADMINISTRATION PANEL</h4>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="overflow:auto">
+
+                <h4 class="card-title">Projects</h4>
+                <button type="button" class="btn btn-success waves-effect waves-light" onclick="addProject()" data-bs-toggle="modal" data-bs-target="#modalAdd">ADD</button>
+                <p class="card-title-desc">
+                    You can view and edit projects on this screen.
+                </p>
+
+                <table id="dataTable" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Project Category Id</th>                            
+                            <th>Github Link</th>
+                            <th>Programlama Dilleri</th>
+                            <th>Teknolojiler</th>
+                            <th>Views</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<div id="modalAdd" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalAddLabel">Add Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <img id="ImageURL" style="height:100px;width:100px;" alt="Yuklenecek foto" />
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtLinkAdd" class="col-md-4 col-form-label">Photo Link</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="url" id="txtLinkAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtNameAdd" class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtNameAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtTitleAdd" class="col-md-4 col-form-label">Title</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtTitleAdd"> </textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtContentAdd" class="col-md-4 col-form-label">Content Text</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtContentAdd"> </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 row">
+                        <label for="txtCategoryAdd" class="col-md-4 col-form-label">Category</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="txtCategoryAdd" name="ProjectCategoryId">
+                                @foreach (var item in Model)
+                                     {
+                                    <option value="@item.Id">@item.Name</option>
+                                         
+                                     }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtGithubAdd" class="col-md-4 col-form-label">Github Link</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtGithubAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtPLangsAdd" class="col-md-4 col-form-label">Programming Languages</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtPLangsAdd" placeholder="List the content as a, b, c."> </textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtTechnologiesAdd" class="col-md-4 col-form-label">Technologies</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtTechnologiesAdd" placeholder="List the content as a, b, c."> </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelAdd" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmAdd" class="btn btn-primary waves-effect waves-light">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+<div id="modalEdit" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalEditLabel">Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="mb-3 row">
+                            <img id="ImageURL" style="height:100px;width:100px;" alt="Yuklenecek foto" />
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtLinkEdit" class="col-md-4 col-form-label">Photo Link</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="url" id="txtLinkEdit">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtNameEdit" class="col-md-4 col-form-label">Name</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" id="txtNameEdit">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtTitleEdit" class="col-md-4 col-form-label">Title</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" type="text" id="txtTitleEdit"> </textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtContentEdit" class="col-md-4 col-form-label">Content Text</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" type="text" id="txtContentEdit"> </textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label for="txtCategoryEdit" class="col-md-4 col-form-label">Category</label>
+                            <div class="col-md-8">
+                                <select class="form-control" id="txtCategoryEdit" name="ProjectCategoryId">
+                                    @foreach (var item in Model)
+                                     {
+                                    <option value="@item.Id">@item.Name</option>
+                                         
+                                     }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtGithubEdit" class="col-md-4 col-form-label">Github Link</label>
+                            <div class="col-md-8">
+                                <input  class="form-control" type="text" id="txtGithubEdit">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtPLangsEdit" class="col-md-4 col-form-label">Programming Languages</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" type="text" id="txtPLangsEdit" placeholder="List the content as a, b, c."> </textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="txtTechnologiesEdit" class="col-md-4 col-form-label">Technologies</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" type="text" id="txtTechnologiesEdit" placeholder="List the content as a, b, c."> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelEdit" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmEdit" class="btn btn-primary waves-effect waves-light">Edit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section Scripts{
+    <!-- Required datatable js -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.uikit.min.css">
+
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/select2/js/select2.min.js"></script>
+    <script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.uikit.min.js"></script>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+        $("#ImageURL").on("change", function () {
+            var output = document.getElementById("ImageUrlPreview");
+            output.src = $(this).val();
+        })
+
+        var _dataTable = $("#dataTable").DataTable(
+            {
+                scrollY: 1000,
+                scrollX: true,
+                pagingType: 'full_numbers',
+                ajax: "@Url.Action("GetAll","Project")",
+                columns: [
+                    { data: 'id' },
+                    { data: 'name' },
+                    {
+                        data: 'baslik', render: function (data, type, row, meta) {
+                            return type === 'display' && data.length > 40 ?
+                                '<span title="' + data + '">' + data.substr(0, 38) + '...</span>' :
+                                data;
+                        }
+
+                    },
+                    {
+                        data: 'icerik', render: function (data, type, row, meta) {
+                            return type === 'display' && data.length > 40 ?
+                                '<span title="' + data + '">' + data.substr(0, 38) + '...</span>' :
+                                data;
+                        }
+
+                    },
+                    { data: 'projectCategoryId' },
+                    { data: 'githubLink' },
+                    { data: 'programlamaDilleri' },
+                    { data: 'teknolojiler' },
+                    { data: 'viewsCount' },
+
+                    {
+                        data: 'id', render: function (data, type) {
+                            return `<a  onClick="deleteProject('${data}')" class="btn btn-danger"> Delete </a> <a onClick="editProject('${data}')" class="btn btn-info"> Edit </a>`;
+                        }
+
+                    },
+                    
+                ],
+
+            }
+        );
+
+
+
+        function addProject() {
+
+            $("#modalAdd").modal('show');
+            $("#displayDiv").hide();
+
+            $("#btnConfirmAdd").off('click').on('click', function () {
+                var data = {
+                    foto: $("#txtLinkAdd").val(),
+                    name: $("#txtNameAdd").val(),
+                    baslik: $("#txtTitleAdd").val(),
+                    icerik: $("#txtContentAdd").val(),
+                    projectCategoryId: $("#txtCategoryAdd").val(),
+                    githubLink: $("#txtGithubAdd").val(),
+                    programlamaDilleri: $("#txtPLangsAdd").val(),
+                    teknolojiler: $("#txtTechnologiesAdd").val(),
+                }
+
+                $.ajax({
+                    type: "POST",
+                    data: data,
+                    url: "@Url.Action("Add","Project")",
+                    success: function (res) {
+                        $("#modalAdd").modal('hide');
+                        _dataTable.ajax.reload();
+                           $.ajax({
+                            type:"POST",
+                            url: "Admin/Project/CounterUpPost",
+                            success:function(res)
+                                 {
+                                _dataTable.ajax.reload();
+                                     }
+                                });
+                              }
+
+
+                        });
+
+                       
+            });
+
+            $("#btnCancelAdd").on('click', function () {
+
+                $("#modalAdd").modal('hide');
+
+
+
+
+
+            });
+
+
+        };
+        function editProject(id) {
+            $("#modalEdit").modal('show');
+
+            var veri = {
+                id: id
+
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetById","Project")",
+                data: veri,
+                success: function (res) {
+
+                    $("#displayDivEdit").show();
+                    $("#txtLinkEdit").val(res.foto),
+                    $("#txtNameEdit").val(res.name);
+                    $("#txtTitleEdit").val(res.baslik);
+                    $("#txtContentEdit").val(res.icerik);
+                    $("#txtCategoryEdit").val(res.projectCategoryId);
+                    $("#txtGithubEdit").val(res.githubLink);
+                    $("#txtPLangsEdit").val(res.programlamaDilleri);
+                    $("#txtTechnologiesEdit").val(res.teknolojiler);
+                   
+                    $("#btnConfirmEdit").click(function () {
+                        
+
+                        veri =
+                        {
+                            id: id,
+                            foto: $("#txtLinkEdit").val(),
+                            name: $("#txtNameEdit").val(),
+                            baslik: $("#txtTitleEdit").val(),
+                            icerik: $("#txtContentEdit").val(),
+                            projectCategoryId: $("#txtCategoryEdit").val(),
+                            githubLink: $("#txtGithubEdit").val(),
+                            programlamaDilleri: $("#txtPLangsEdit").val(),
+                            teknolojiler: $("#txtTechnologiesEdit").val(),
+
+
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("Edit","Project")",
+                            data: veri,
+                            success: function (res) {
+
+                                $("#modalEdit").modal('hide');
+                                _dataTable.ajax.reload();
+
+
+                            }
+                        })
+
+                    });
+
+                    $("#btnCancelEdit").on('click', function () {
+
+                        $("#modalEdit").modal('hide');
+
+
+                    });
+                }
+
+            })
+        }
+
+
+
+
+
+
+
+
+        function deleteProject(id) {
+
+            var data = {
+                id: id
+
+            };
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: "@Url.Action("Delete","Project")",
+                success: function (res) {
+                     _dataTable.ajax.reload();
+                }
+
+
+            });
+
+
+
+        }
+
+
+
+
+    </script>
+}

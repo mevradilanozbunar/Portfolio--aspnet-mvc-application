@@ -1,0 +1,383 @@
+﻿<div style="padding-top:70px" class="row">
+    <div class="col-12">
+
+        <div class="page-title-box align-self-center p-static order-2 text-center">
+            <h4 class="mb-0">USERS ADMINISTRATION PANEL</h4>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="overflow:auto">
+
+                <h4 class="card-title">Kullanıcılar</h4>
+                <button type="button" class="btn btn-success waves-effect waves-light" onclick="addUser()" data-bs-toggle="modal" data-bs-target="#modal">Yeni Kullanıcı Ekle</button>
+                <p class="card-title-desc">
+                    Bu ekranda uygulama kullanıcılarını görüntüleyebilir ve düzenleyebilirsiniz.
+                </p>
+
+                <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            
+
+                            <th>User Role</th>                           
+                            <th>UserName</th>
+                            <th>Email</th> 
+                            <th>Password</th>                                                      
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Activity Status</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Yeni Kullanıcı Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label for="selectUserRoleNameAdd" class="col-md-4 col-form-label">Kullanıcı Tipi</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="selectUserRoleNameAdd"></select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="txtNameAdd" class="col-md-4 col-form-label">Kullanıcı İsmi</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Kullanıcının ismini giriniz: " id="txtNameAdd">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="txtSurNameAdd" class="col-md-4 col-form-label">Kullanıcı Soyadı</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Kullanıcının soyadını giriniz: " id="txtSurNameAdd">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="txtEmailAdd" class="col-md-4 col-form-label">Kullanıcı Emaili</label>
+                    <div class="col-md-8">
+                        <input id="txtEmailAdd" class="form-control input-mask" data-inputmask="'alias': 'email'">
+                    </div>
+                </div>                
+                <div class="mb-3 row">
+                    <label for="txtAppUserNameAdd" class="col-md-4 col-form-label">Kullanıcı Uygulama Adı</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Kullanıcının uygulamadaki rumuzu giriniz: " id="txtAppUserNameAdd">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                        <label for="txtPasswordAdd" class="col-md-4 col-form-label">Password</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="password" id="txtPasswordAdd">
+                        </div>
+                    </div>
+                <div class="mb-3 row">
+                    <label for="selectIsActiveAdd" class="col-md-4 col-form-label">Kullanıcı Aktiflik Durumu</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="selectIsActiveAdd">
+                            <option id="optActive" value="true">Aktif Kullanıcı</option>
+                            <option id="optInactive" value="false">İnaktif Kullanıcı</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancel" class="btn btn-light waves-effect" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" id="btnConfirm" class="btn btn-primary waves-effect waves-light">Ekle</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="modalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalEditLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalEditLabel">Kullanıcı Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modalEdit" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label for="selectUserRoleName" class="col-md-4 col-form-label">Kullanıcı Tipi</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="selectUserRoleName"></select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="txtName" class="col-md-4 col-form-label">Kullanıcı İsmi</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Kullanıcının ismini giriniz: " id="txtName">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="txtSurName" class="col-md-4 col-form-label">Kullanıcı Soyadı</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Kullanıcının soyadını giriniz: " id="txtSurName">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="txtEmail" class="col-md-4 col-form-label">Kullanıcı Emaili</label>
+                    <div class="col-md-8">
+                        <input id="txtEmail" class="form-control input-mask" data-inputmask="'alias': 'email'">
+                    </div>
+                </div>
+ 
+                <div class="mb-3 row">
+                    <label for="txtAppUserName" class="col-md-4 col-form-label">Kullanıcı Uygulama Adı</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Kullanıcının uygulamadaki rumuzu giriniz: " id="txtAppUserName">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                        <label for="txtPassword" class="col-md-4 col-form-label">Password</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="password" id="txtPassword">
+                        </div>
+                    </div>
+                <div class="mb-3 row">
+                    <label for="selectIsActive" class="col-md-4 col-form-label">Kullanıcı Aktiflik Durumu</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="selectIsActive">
+                            <option id="optActive" value="true">Aktif Kullanıcı</option>
+                            <option id="optInactive" value="false">İnaktif Kullanıcı</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelEdit" class="btn btn-light waves-effect" data-bs-dismiss="modalEdit">Kapat</button>
+                <button type="button" id="btnConfirmEdit" class="btn btn-primary waves-effect waves-light">Düzenle</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section Scripts{
+    <!-- Required datatable js -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.uikit.min.css">
+
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/select2/js/select2.min.js"></script>
+    <script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+   
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.uikit.min.js"></script>
+
+
+    <script type="text/javascript">
+        var _dataTable;
+        $(document).ready(function () {
+          
+            loadTable();
+        });
+        
+        function loadTable() {
+            var dataTable = $("#dataTable").DataTable(
+                {
+                    ajax: "@Url.Action("GetAll","User")",
+                    columns: [
+                        { data: 'appUserRole.name' },
+                        { data: 'userName' },
+                        { data: 'email' },
+                        {
+                            data: 'password', render: function (data, type) {
+                                return type === 'display' && data.length > 0 ?
+                                    '<span title="' + data + '">' + "*".repeat(data.length) + '</span>' :
+                                    data;
+                            }
+                               
+                        },
+                        
+                        { data: 'name' },
+                        { data: 'surname' },
+                                                
+                        {
+                            data: 'isActive',
+                            render: function (data, type) {
+                                if (data) {
+                                    return `<p>Aktif Kullanıcı</p>`;
+                                } else {
+                                    return `<p>İnaktif Kullanıcı</p>`;
+                                }
+                            }
+                        },
+                        {
+                            data: 'id',
+                            render: function (data, type) {
+                                return `<a id="btnDelete-${data}" onClick="deleteUser('${data}')" class="btn btn-danger"> Sil </a> <a onClick="editUser('${data}')" class="btn btn-info">Düzenle</a>`;
+                            }
+                        }
+                    ]
+                }
+            );
+            _dataTable = dataTable;
+        }
+       
+        function addUser() {
+            $("#btnConfirm").off('click');
+            getUserRoleNames("selectUserRoleNameAdd");
+            $("#btnCancel").one('click', function (event) {
+                $("#txtNameAdd,#txtSurNameAdd,#txtEmailAdd,#txtAppUserNameAdd,#txtPasswordAdd").val('');
+                getUserRoleNames("selectUserRoleNameAdd");
+                $("#modal").modal('hide');
+            });
+            $("#btnConfirm").on('click', function (event) {
+                 
+                var veri = {
+                    name: $("#txtNameAdd").val(),
+                    surname: $("#txtSurNameAdd").val(),
+                    email: $("#txtEmailAdd").val(),
+                    password: $("#txtPasswordAdd").val(),
+                    userName: $("#txtAppUserNameAdd").val(),
+                    appUserRoleId: $("#selectUserRoleNameAdd option:selected").val(),
+                    isActive: $("#selectIsActiveAdd option:selected").val()
+                
+                };
+               
+                $.ajax({
+                            type: "POST",
+                            data: veri,
+                            url: "@Url.Action("Add","User")",
+                            success: function (res) {
+                                $("#modal").modal('hide');
+                                _dataTable.ajax.reload();
+                                $("#txtNameAdd").val('');
+                        $("#txtSurNameAdd").val('');
+                                $("#txtEmailAdd").val('');
+                        $("#txtAppUserNameAdd").val('');
+                        $("#txtPasswordAdd").val('');
+                                getUserRoleNames("selectUserRoleNameAdd");
+                         
+                            }
+                   
+                });
+            });
+        }
+        function deleteUser(userId) {            
+                    var veri = {
+                        id: userId
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("Delete","User")",
+                        data: veri,
+                        success: function (res) {
+                        
+                         
+                            _dataTable.ajax.reload();
+                        }
+                    });
+                }
+
+        function editUser(userId) {
+            $("#modalEdit").modal('show');
+            getUserRoleNames("selectUserRoleName");
+            var veri = {
+                id: userId
+
+            };
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("FindById","User")",
+                data: veri,
+                success: function (res) {
+
+                    $("#optUserRoleName-" + res.appUserRoleId).attr("selected", true);
+                    $("#txtName").val(res.name);
+                    $("#txtSurName").val(res.surname);
+                    $("#txtEmail").val(res.email);
+                    $("#txtPassword").val(res.password);
+                    $("#txtAppUserName").val(res.userName);
+                    if (res.isActive) {
+                        $("#optActive").attr("selected", true);
+                    } else { $("optInactive").attr("selected", true); }
+                    $("btnConfirmEdit").off("click");
+                    $("#btnCancelEdit").one('click', function (event) {
+                        $("#modalEdit").modal('hide');
+                        getUserRoleNames("selectUserRoleName");
+
+                        $("#txtName").val();
+                        $("#txtSurName").val();
+                        $("#txtEmail").val();
+                        $("#txtAppUserName").val();
+                        $("#txtPassword").val();
+
+                    });
+                    $("#btnConfirmEdit").on('click', function (event) {
+
+                  
+                            var veri = {
+                                id: res.id,
+
+                                name: $("#txtName").val(),
+                                surname: $("#txtSurName").val(),
+                                email: $("#txtEmail").val(),
+                                password: $("#txtPassword").val(),
+                                userName: $("#txtAppUserName").val(),
+                                appUserRoleId: $("#selectUserRoleName option:selected").val(),
+                                isActive: $("#selectIsActive option:selected").val()
+
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("Edit","User")",
+                                data: veri,
+                                success: function (resEdit) {
+
+                                    _dataTable.ajax.reload();
+                                    $("#modalEdit").modal('hide');
+                                }
+                            });
+                        
+                       
+                    });
+                }
+
+            })
+        }
+        
+        function getUserRoleNames(selectName) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetUserRoleNames","User")",
+                success: function (res) {
+                    $("#" + selectName).empty();
+                    for (var i = 0; i < res.length; i++)
+                        $("#" + selectName).append(`<option value="${res[i].id}" id="optUserRoleName-${res[i].id}">${res[i].name}</option>`);
+                }
+            });
+        }
+
+
+       
+    </script>
+
+
+
+
+    }

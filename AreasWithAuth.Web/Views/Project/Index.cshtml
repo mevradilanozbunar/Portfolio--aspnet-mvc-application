@@ -1,0 +1,207 @@
+﻿@using AreasWithAuth.Models;
+@using Microsoft.IdentityModel.Tokens;
+@using AreasWithAuth.Models.ViewModels;
+@{
+	Layout = "_Layout";
+}
+@model Allinfo
+
+
+
+<section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 align-self-center p-static order-2 text-center">
+
+
+
+
+				<h2 class="word-rotator font-weight-semi-bold letters type mb-2">
+
+					<span class="word-rotator-words">
+						<b class="is-hidden" style="opacity: 1;"><i class="out">K</i><i class="out">o</i><i class="out">d</i><i class="out"> </i><i class="out">Y</i><i class="out">a</i><i class="out">z</i><i class="out">m</i><i class="out">a</i><i class="out">k</i><i class="out"> </i><i class="out">B</i><i class="out">i</i><i class="out">r</i><i class="out"> </i><i class="out">S</i><i class="out">a</i><i class="out">n</i><i class="out">a</i><i class="out">t</i><i class="out">t</i><i class="out">ı</i><i class="out">r</i><i class="out">.</i><i class="out"> </i><i class="out">.</i></b>
+						<b style="opacity: 1;" class="is-hidden"><i class="out">K</i><i class="out">o</i><i class="out">d</i><i class="out"> </i><i class="out">Y</i><i class="out">a</i><i class="out">z</i><i class="out">m</i><i class="out">a</i><i class="out">k</i><i class="out"> </i><i class="out">B</i><i class="out">i</i><i class="out">r</i><i class="out"> </i><i class="out">S</i><i class="out">a</i><i class="out">n</i><i class="out">a</i><i class="out">t</i><i class="out">t</i><i class="out">ı</i><i class="out">r</i><i class="out">.</i><i class="out"> </i><i class="out">.</i></b>
+						<b style="opacity: 1;" class="is-visible"><i class="out">K</i><i class="out">o</i><i class="out">d</i><i class="out"> </i><i class="out">Y</i><i class="out">a</i><i class="out">z</i><i class="out">m</i><i class="out">a</i><i class="out">k</i><i class="out"> </i><i class="out">B</i><i class="out">i</i><i class="out">r</i><i class="out"> </i><i class="out">S</i><i class="out">a</i><i class="out">n</i><i class="out">a</i><i class="out">t</i><i class="out">t</i><i class="out">ı</i><i class="out">r</i><i class="out">.</i><i class="out"> </i><i class="out">.</i></b>
+					</span>
+
+				</h2>
+
+
+
+				@foreach (var item in @Model.Profiles)
+				{
+					<ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean m-0">
+						<li class="social-icons-github"><a href="@item.Github" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></li>
+						<li class="social-icons-linkedin"><a href="@item.Linkedin" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+
+					</ul>
+				}
+			</div>
+			<div class="col-md-12 align-self-center order-1">
+				<ul class="breadcrumb d-block text-center">
+					<li><a asp-controller="Home" asp-action="Index">Portfolyo</a></li>
+					<li class="active">Projeler</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+@{
+	if (Model.Projects.IsNullOrEmpty())
+	{
+		@Html.Partial("NotFound")
+		;
+	}
+	if (!Model.Projects.IsNullOrEmpty())
+	{
+		<div class="container py-4">
+
+			<div class="row">
+				<div class="col-lg-3 order-lg-2">
+					<aside class="sidebar">
+						<form asp-controller="Project" asp-action="Search" method="get">
+							<div class="input-group mb-3 pb-1">
+								<input class="form-control text-1" placeholder="Ara..." name="SearchProject" id="s" type="text">
+								<button type="submit" class="btn btn-dark text-1 p-2"><i class="fas fa-search m-2"></i></button>
+							</div>
+						</form>
+						<h5 class="font-weight-semi-bold pt-4">Kategoriler</h5>
+
+						<ul class="nav nav-list flex-column mb-5">
+							@foreach (var item in Model.ProjectCategories)
+							{
+								<li class="nav-item"><a class="nav-link" asp-controller="Project" asp-action="ProjectCategory" asp-route-id="@item.Id">@item.Name (@item.Projects.Count())</a></li>
+							}
+
+
+						</ul>
+
+						<div class="tabs tabs-dark mb-4 pb-2">
+							<ul class="nav nav-tabs">
+								<li class="nav-item"><a class="nav-link show active text-1 font-weight-bold text-uppercase" href="#popularPosts" data-bs-toggle="tab">Popüler</a></li>
+								<li class="nav-item"><a class="nav-link text-1 font-weight-bold text-uppercase" href="#recentPosts" data-bs-toggle="tab">En Son</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="popularPosts">
+									<ul class="simple-post-list">
+										@foreach (var item in Model.topViewsProjects)
+										{
+											<li>
+												<div class="post-image">
+													<div class="img-thumbnail img-thumbnail-no-borders d-block">
+														<a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id">
+															<img src="@item.Foto" width="50" height="50" alt="">
+														</a>
+													</div>
+												</div>
+												<div class="post-info">
+													<a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id">@item.Name</a>
+													<div class="post-meta">
+														@item.DateModified.ToShortDateString()
+													</div>
+												</div>
+											</li>
+										}
+
+
+									</ul>
+								</div>
+								<div class="tab-pane" id="recentPosts">
+									<ul class="simple-post-list">
+										@foreach (var item in Model.RecentsProjects)
+										{
+											<li>
+												<div class="post-image">
+													<div class="img-thumbnail img-thumbnail-no-borders d-block">
+														<a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id">
+															<img src="@item.Foto" width="50" height="50" alt="">
+														</a>
+													</div>
+												</div>
+												<div class="post-info">
+													<a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id">@item.Name</a>
+													<div class="post-meta">
+														@item.DateModified.ToShortDateString()
+													</div>
+												</div>
+											</li>
+										}
+
+
+									</ul>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					
+
+
+
+
+
+				
+						@foreach (var item in Model.Profiles)
+						{
+							<span><i class="fab fa-github"></i> <a style="color:black ; font-weight:bold" href="@item.Github" target="_blank">BENİ GITHUB'TA BULUN!</a> </span>
+
+						}
+
+
+
+
+					</aside>
+				</div>
+
+				<div class="col-lg-9 order-lg-1">
+					<div class="blog-posts">
+
+						@foreach (var item in Model.Projects)
+						{
+							<article class="post post-medium">
+								<div class="row mb-3">
+									<div class="col-lg-5">
+										<div class="post-image">
+											<a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id">
+												<img src="@item.Foto" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
+											</a>
+										</div>
+									</div>
+									<div class="col-lg-7">
+										<div class="post-content">
+											<h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2"><a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id">@item.Name</a></h2>
+											<p class="mb-0">@item.Baslik</p>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										<div class="post-meta">
+											<span><i class="far fa-calendar-alt"></i> @item.DateModified.ToShortDateString() </span>
+											<span><i class="far fa-user"></i> By <a asp-controller="Home" asp-action="Index">Mevra Dilan Erten Özbunar</a> </span>
+			
+											<span class="d-block d-sm-inline-block float-sm-end mt-3 mt-sm-0"><a asp-controller="Project" asp-action="Project" asp-route-id="@item.Id" class="btn btn-xs btn-light text-1 text-uppercase">Daha Fazla</a></span>
+										</div>
+									</div>
+								</div>
+							</article>
+						}
+
+
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+	}
+}
+

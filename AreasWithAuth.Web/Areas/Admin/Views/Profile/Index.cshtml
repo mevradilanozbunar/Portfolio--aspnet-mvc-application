@@ -1,0 +1,541 @@
+﻿
+
+<div style="padding-top:70px" class="row">
+    <div class="col-12">
+
+        <div class="page-title-box align-self-center p-static order-2 text-center">
+            <h4 class="mb-0">PROFILE INFORMATION ADMINISTRATION PANEL</h4>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body" style="overflow:auto">
+
+                <h4 class="card-title">Informations</h4>
+                <button type="button" class="btn btn-success waves-effect waves-light" onclick="addProfile()" data-bs-toggle="modal" data-bs-target="#modalAdd">ADD</button>
+                <p class="card-title-desc">
+                    You can view and edit profile informations on this screen.
+                </p>
+
+                <table id="dataTable" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>About Me Part One</th>
+                            <th>About Me Part Two</th>
+                            <th>Nationality</th>
+                            <th>Marital</th>
+                            <th>Year Of Birth</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Github</th>
+                            <th>Skype</th>
+                            <th>Linkedin</th>
+                            <th>City</th>
+                            <th>Summary</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<div id="modalAdd" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalAddLabel">Add Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">      
+
+                     <img id="imgProfile" style="height:100px;width:100px;" alt="Yuklenecek foto" />
+    <input type="text" style="display:none" id="txtImage" />
+    <div class="mb-3 row">
+        <label for="inputName" class="col-4 col-form-label">Profile Picture</label>
+        <div class="col-8">
+            <input type="file" class="form-control" name="inputName" id="dosya" placeholder="Name">
+        </div>
+    </div>
+
+                    <div class="mb-3 row">
+                        <label for="txtName" class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtNameAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtAboutMePartOne" class="col-md-4 col-form-label">About Me Part One</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtAboutMePartOneAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtAboutMePartTwo" class="col-md-4 col-form-label">About Me Part Two</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtAboutMePartTwoAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtNationality" class="col-md-4 col-form-label">Nationality</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtNationalityAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtMarital" class="col-md-4 col-form-label">Marital</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtMaritalAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtYearOfBirth" class="col-md-4 col-form-label">Year Of Birth</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="number" id="txtYearOfBirthAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtPhone" class="col-md-4 col-form-label">Phone</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtPhoneAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtEmail" class="col-md-4 col-form-label">Email</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtEmailAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtGithub" class="col-md-4 col-form-label">Github Link</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtGithubAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtSkype" class="col-md-4 col-form-label">Skype</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtSkypeAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtLinkedin" class="col-md-4 col-form-label">Linkedin Link</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtLinkedinAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtCity" class="col-md-4 col-form-label">City</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtCityAdd">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtSummary" class="col-md-4 col-form-label">Summary</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtSummaryAdd">
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelAdd" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmAdd" class="btn btn-primary waves-effect waves-light">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="modalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalEditLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalEditLabel">Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    
+                    <div class="mb-3 row">
+                        <label for="txtName" class="col-md-4 col-form-label">Name</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtName">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtAboutMePartOne" class="col-md-4 col-form-label">About Me Part One</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtAboutMePartOne"> </textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtAboutMePartTwo" class="col-md-4 col-form-label">About Me Part Two</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtAboutMePartTwo"> </textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtNationality" class="col-md-4 col-form-label">Nationality</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtNationality">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtMarital" class="col-md-4 col-form-label">Marital</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtMarital">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtYearOfBirth" class="col-md-4 col-form-label">Year Of Birth</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="number" id="txtYearOfBirth">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtPhone" class="col-md-4 col-form-label">Phone</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtPhone">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtEmail" class="col-md-4 col-form-label">Email</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtEmail">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtGithub" class="col-md-4 col-form-label">Github Link</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtGithub">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtSkype" class="col-md-4 col-form-label">Skype</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtSkype">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtLinkedin" class="col-md-4 col-form-label">Linkedin Link</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtLinkedin">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtCity" class="col-md-4 col-form-label">City</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtCity">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtSummary" class="col-md-4 col-form-label">Summary</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" type="text" id="txtSummary"> </textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelEdit" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnConfirmEdit" class="btn btn-primary waves-effect waves-light">Edit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section Scripts{
+    <!-- Required datatable js -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.uikit.min.css">
+
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/libs/select2/js/select2.min.js"></script>
+    <script src="~/assets/libs/tinymce/tinymce.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/dataTables.uikit.min.js"></script>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+
+
+
+        var _dataTable = $("#dataTable").DataTable(
+            {
+                scrollY: 200,
+                scrollX: true,
+                pagingType: 'full_numbers',
+                ajax: '@Url.Action("GetAll","Profile")',
+                columns: [
+                    { data: 'id' },
+                    { data: 'name' },
+                    {
+                        data: 'aboutMePartOne', render: function (data, type, row, meta) {
+                            return type === 'display' && data.length > 40 ?
+                                '<span title="' + data + '">' + data.substr(0, 38) + '...</span>' :
+                                data;
+                        }
+
+                    },
+                    {
+                        data: 'aboutMePartTwo', render: function (data, type, row, meta) {
+                            return type === 'display' && data.length > 40 ?
+                                '<span title="' + data + '">' + data.substr(0, 38) + '...</span>' :
+                                data;
+                        }
+
+                    },
+                   
+                    { data: 'nationality' },
+                    { data: 'marital' },
+                    { data: 'yearOfBirth' },
+                    { data: 'phone' },
+                    { data: 'email' },
+                    { data: 'github' },
+                    { data: 'skype' },
+                    { data: 'linkedin' },
+                    { data: 'city' },
+                    {
+                        data: 'summary', render: function (data, type, row, meta) {
+                            return type === 'display' && data.length > 40 ?
+                                '<span title="' + data + '">' + data.substr(0, 38) + '...</span>' :
+                                data;
+                        }
+
+                    },
+                    {
+                        data: 'id', render: function (data, type) {
+                            return `<a  onClick="deleteProfile('${data}')" class="btn btn-danger"> Delete </a> <a onClick="editProfile('${data}')" class="btn btn-info"> Edit </a>`;
+
+                        }
+
+                    },
+                ],
+            }
+        );
+
+
+
+        function addProfile() {
+
+            $("#modalAdd").modal('show');
+            $("#displayDiv").hide();
+
+            $("#btnConfirmAdd").off('click').on('click', function () {
+                var file = $("#dosya").prop('files')[0];
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                        var data = {
+                        profilePicture: reader.result,
+                    name: $("#txtNameAdd").val(),
+                    aboutMePartOne: $("#txtAboutMePartOneAdd").val(),
+                    aboutMePartTwo: $("#txtAboutMePartTwoAdd").val(),
+                    nationality: $("#txtNationalityAdd").val(),
+                    marital: $("#txtMaritalAdd").val(),
+                    yearOfBirth: $("#txtYearOfBirthAdd").val(),
+                    phone: $("#txtPhoneAdd").val(),
+                    email: $("#txtEmailAdd").val(),
+                    github: $("#txtGithubAdd").val(),
+                    skype: $("#txtSkypeAdd").val(),
+                    linkedin: $("#txtLinkedinAdd").val(),
+                    city: $("#txtCityAdd").val(),
+                    summary: $("#txtSummaryAdd").val(),
+
+                }
+
+                $.ajax({
+                    type: "POST",
+                    data: data,
+                    url: "@Url.Action("Add","Profile")",
+                    success: function (res) {
+
+
+                        $("#modalAdd").modal('hide');
+                        _dataTable.ajax.reload();
+                    }
+
+
+                });
+                
+                
+                
+                
+                
+                };
+
+                
+
+
+            });
+
+            $("#btnCancelAdd").on('click', function () {
+
+                $("#modalAdd").modal('hide');
+
+
+
+
+
+            });
+
+
+        };
+        function editProfile(id) {
+            $("#modalEdit").modal('show');
+
+            var veri = {
+                id: id
+
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetById","Profile")",
+                data: veri,
+                success: function (res) {
+
+                    $("#displayDivEdit").show();
+                    $("#txtName").val(res.name);
+                    $("#txtAboutMePartOne").val(res.aboutMePartOne);
+                    $("#txtAboutMePartTwo").val(res.aboutMePartTwo);
+                    $("#txtNationality").val(res.nationality);
+                    $("#txtMarital").val(res.marital);
+                    $("#txtYearOfBirth").val(res.yearOfBirth);
+                    $("#txtPhone").val(res.phone);
+                    $("#txtEmail").val(res.email);
+                    $("#txtGithub").val(res.github);
+                    $("#txtSkype").val(res.skype);
+                    $("#txtLinkedin").val(res.linkedin);
+                    $("#txtCity").val(res.city);
+                    $("#txtSummary").val(res.summary);
+
+                    $("#btnConfirmEdit").click(function () {
+
+
+                        veri =
+                        {
+                            id : id,
+                            name: $("#txtName").val(),
+                            aboutMePartOne: $("#txtAboutMePartOne").val(),
+                            aboutMePartTwo: $("#txtAboutMePartTwo").val(),
+                            nationality: $("#txtNationality").val(),
+                            marital: $("#txtMarital").val(),
+                            yearOfBirth: $("#txtYearOfBirth").val(),
+                            phone: $("#txtPhone").val(),
+                            email: $("#txtEmail").val(),
+                            github: $("#txtGithub").val(),
+                            skype: $("#txtSkype").val(),
+                            linkedin: $("#txtLinkedin").val(),
+                            city: $("#txtCity").val(),
+                            summary: $("#txtSummary").val(),
+
+
+                        }
+                        //todo editte fonksiyona tıklancak
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("Edit","Profile")",
+                            data: veri,
+                            success: function (res) {
+
+                                $("#modalEdit").modal('hide');
+                                _dataTable.ajax.reload();
+
+
+                            }
+                        })
+
+                    });
+
+                    $("#btnCancelEdit").on('click', function () {
+
+                        $("#modalEdit").modal('hide');
+
+
+                    });
+                }
+
+            })
+        }
+
+
+
+
+
+
+
+
+        function deleteProfile(id) {
+
+            var data = {
+                id: id
+
+            };
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: "@Url.Action("Delete","Profile")",
+                success: function (res) {
+
+
+                    _dataTable.ajax.reload();
+                }
+
+
+            });
+
+
+
+        }
+
+
+        $("#dosya").change(function () {
+
+            var file = $("#dosya").prop('files')[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+
+                $("#imgProfile").attr('src', reader.result);
+
+            };
+
+        });
+
+
+
+
+    </script>
+}
